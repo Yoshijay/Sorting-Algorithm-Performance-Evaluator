@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.sortingapp.sortingalgorithmevaluator.controllers.MainController"
+      spacing="10"
+      alignment="CENTER">
+
+    <Label text="Sorting Algorithm Performance Evaluator"
+           style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <Label text="JavaFX project initialized successfully."/>
+</VBox>
