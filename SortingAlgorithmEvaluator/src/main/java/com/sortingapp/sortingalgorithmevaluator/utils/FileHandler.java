@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
 public static CSVData readCSV(File file) throws Exception {
     List<String> headers = new ArrayList<>();
     List<List<String>> rows = new ArrayList<>();
@@ -25,5 +31,16 @@ public static CSVData readCSV(File file) throws Exception {
     }
 
     return new CSVData(headers, rows, file.getAbsolutePath());
+}
+
+
+public static List<String> getColumnData(List<List<String>> rows, int columnIndex) {
+    List<String> columnData = new ArrayList<>();
+    for (List<String> row : rows) {
+        if (columnIndex < row.size()) {
+            columnData.add(row.get(columnIndex));
+        }
+    }
+    return columnData;
 }
 
