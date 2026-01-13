@@ -36,5 +36,35 @@ public class FileHandler {
 
         return new CSVData(headers, rows, file.getAbsolutePath());
     }
+    
+    public static boolean isNumericColumn(List<String> columnData) {
+        for (String value : columnData) {
+            if (!value.isEmpty()) {
+                try {
+                    Double.parseDouble(value);
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static List<String> getColumnData(List<List<String>> rows, int columnIndex) {
+        List<String> columnData = new ArrayList<>();
+        for (List<String> row : rows) {
+            if (columnIndex < row.size()) {
+                columnData.add(row.get(columnIndex));
+            }
+        }
+        return columnData;
+    }
+
+    public static int[] convertToIntArray(List<String> stringList) {
+        return stringList.stream()
+                .filter(s -> !s.isEmpty())
+                .mapToInt(Integer::parseInt)
+                .toArray();
+    }
 
 }
