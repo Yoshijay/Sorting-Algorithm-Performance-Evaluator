@@ -20,12 +20,22 @@
     <Button text="Sort & Compare"
             onAction="#handleSort" />
 
-    <TableView fx:id="resultsTable" style="-fx-pref-height: 200;">
+    <TableView fx:id="resultsTable" style="-fx-pref-height: 220;">
         <columns>
-            <TableColumn text="Algorithm" prefWidth="200" />
-            <TableColumn text="Execution Time (ms)" prefWidth="200" />
+            <TableColumn text="Algorithm"
+                        fx:id="algorithmColumn"
+                        prefWidth="180" />
+
+            <TableColumn text="Execution Time (ms)"
+                        fx:id="timeColumn"
+                        prefWidth="180" />
+
+            <TableColumn text="Status"
+                        fx:id="statusColumn"
+                        prefWidth="140" />
         </columns>
     </TableView>
+
 
     <Label fx:id="bestAlgorithmLabel"
            text="Best Algorithm:"

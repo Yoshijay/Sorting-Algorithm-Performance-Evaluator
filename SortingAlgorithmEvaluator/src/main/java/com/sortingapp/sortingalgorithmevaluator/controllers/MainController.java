@@ -1,6 +1,8 @@
 package com.sortingapp.sortingalgorithmevaluator.controllers;
 
+import com.sortingapp.sortingalgorithmevaluator.algorithms.SortingAlgorithm;
 import com.sortingapp.sortingalgorithmevaluator.models.CSVData;
+import com.sortingapp.sortingalgorithmevaluator.models.SortingResult;
 import com.sortingapp.sortingalgorithmevaluator.utils.FileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +17,18 @@ import java.util.Map;
 
 public class MainController {
 
+    // ===== T18: Table columns for attractive GUI presentation =====
+    @FXML
+    private TableColumn<SortingResult, String> algorithmColumn;
+
+    @FXML
+    private TableColumn<SortingResult, Number> timeColumn;
+
+    @FXML
+    private TableColumn<SortingResult, String> statusColumn;
+
+    // ============================================================
+
     @FXML
     private ComboBox<String> columnComboBox;
 
@@ -28,6 +42,23 @@ public class MainController {
     private TableView<String> dataPreviewTable;
 
     private CSVData csvData;
+
+    // ===== T18: Initialize table column bindings =====
+    @FXML
+    private void initialize() {
+        algorithmColumn.setCellValueFactory(
+                data -> data.getValue().algorithmNameProperty()
+        );
+
+        timeColumn.setCellValueFactory(
+                data -> data.getValue().executionTimeProperty()
+        );
+
+        statusColumn.setCellValueFactory(
+                data -> data.getValue().statusProperty()
+        );
+    }
+    // =================================================
 
     @FXML
     private void handleUpload(ActionEvent event) {
