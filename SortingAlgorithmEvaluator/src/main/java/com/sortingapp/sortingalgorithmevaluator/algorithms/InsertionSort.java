@@ -5,6 +5,9 @@ public class InsertionSort implements SortingAlgorithm {
 
     @Override
     public void sort(int[] array) {
+        if (array == null || array.length <= 1) {
+            return;
+        }
         int n = array.length;
         for (int i = 1; i < n; ++i) {
             int key = array[i];

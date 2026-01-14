@@ -1,47 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="15" alignment="TOP_CENTER"
-      xmlns="http://javafx.com/javafx/8"
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.sortingapp.sortingalgorithmevaluator.controllers.MainController">
+      fx:controller="com.sortingapp.sortingalgorithmevaluator.controllers.MainController"
+      spacing="10"
+      style="-fx-padding: 20; -fx-background-color: #f4f4f4;">
 
     <Label text="Sorting Algorithm Performance Evaluator"
-           style="-fx-font-size: 24; -fx-font-weight: bold;" />
+           style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
-    <Button text="Upload CSV File" onAction="#handleUpload" />
+    <!-- File Upload Section -->
+    <VBox spacing="10" style="-fx-border-color: #bdc3c7; -fx-border-width: 1; -fx-padding: 15;">
+        <Label text="1. Upload CSV File" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <HBox spacing="10">
+            <TextField fx:id="filePathField" promptText="Select CSV file..."
+                       style="-fx-pref-width: 400;" editable="false"/>
+            <Button fx:id="browseButton" text="Browse" onAction="#handleBrowseFile"/>
+        </HBox>
+    </VBox>
 
-    <ComboBox fx:id="columnComboBox"
-              promptText="Select Numeric Column"
-              style="-fx-pref-width: 250;" />
+    <!-- Column Selection -->
+    <VBox spacing="10" style="-fx-border-color: #bdc3c7; -fx-border-width: 1; -fx-padding: 15;">
+        <Label text="2. Select Column to Sort" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <HBox spacing="10">
+            <ComboBox fx:id="columnComboBox" promptText="Select numeric column..."
+                      style="-fx-pref-width: 300;"/>
+            <Button fx:id="loadColumnsButton" text="Load Columns" onAction="#handleLoadColumns"
+                    disable="true"/>
+        </HBox>
+    </VBox>
 
-    <Button text="Sort & Compare"
-            onAction="#handleSort" />
+    <!-- Algorithm Selection -->
+    <VBox spacing="10" style="-fx-border-color: #bdc3c7; -fx-border-width: 1; -fx-padding: 15;">
+        <Label text="3. Select Sorting Algorithms" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <VBox spacing="5">
+            <CheckBox fx:id="insertionSortCheck" text="Insertion Sort"/>
+            <CheckBox fx:id="shellSortCheck" text="Shell Sort"/>
+            <CheckBox fx:id="mergeSortCheck" text="Merge Sort"/>
+            <CheckBox fx:id="quickSortCheck" text="Quick Sort"/>
+            <CheckBox fx:id="heapSortCheck" text="Heap Sort"/>
+            <CheckBox fx:id="selectAllCheck" text="Select All" onAction="#handleSelectAll"/>
+        </VBox>
+    </VBox>
 
-    <TableView fx:id="resultsTable" style="-fx-pref-height: 220;">
-        <columns>
-            <TableColumn text="Algorithm"
-                        fx:id="algorithmColumn"
-                        prefWidth="180" />
+    <!-- Action Buttons -->
+    <HBox spacing="10">
+        <Button fx:id="sortButton" text="Run Sorting Algorithms" onAction="#handleSort"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
+                disable="true"/>
+        <Button fx:id="resetButton" text="Reset" onAction="#handleReset"/>
+    </HBox>
 
-            <TableColumn text="Execution Time (ms)"
-                        fx:id="timeColumn"
-                        prefWidth="180" />
+    <!-- Results Section -->
+    <VBox spacing="10" style="-fx-border-color: #bdc3c7; -fx-border-width: 1; -fx-padding: 15;">
+        <Label text="4. Performance Results" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <TableView fx:id="resultsTable" style="-fx-pref-height: 200;">
+            <columns>
+                <TableColumn text="Algorithm" prefWidth="150"/>
+                <TableColumn text="Execution Time (ms)" prefWidth="150"/>
+                <TableColumn text="Status" prefWidth="100"/>
+            </columns>
+        </TableView>
 
-            <TableColumn text="Status"
-                        fx:id="statusColumn"
-                        prefWidth="140" />
-        </columns>
-    </TableView>
+        <Label fx:id="bestAlgorithmLabel" text="Best Algorithm: "
+               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+    </VBox>
 
-
-    <Label fx:id="bestAlgorithmLabel"
-           text="Best Algorithm:"
-           style="-fx-font-size: 14; -fx-font-weight: bold;" />
-
-    <TableView fx:id="dataPreviewTable"
-               style="-fx-pref-height: 150;" />
+    <!-- Data Preview -->
+    <VBox spacing="10" style="-fx-border-color: #bdc3c7; -fx-border-width: 1; -fx-padding: 15;">
+        <Label text="Data Preview" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+        <TableView fx:id="dataPreviewTable" style="-fx-pref-height: 150;"/>
+    </VBox>
 
 </VBox>
