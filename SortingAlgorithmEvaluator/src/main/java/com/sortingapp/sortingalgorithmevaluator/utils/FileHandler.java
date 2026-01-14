@@ -40,10 +40,20 @@ public class FileHandler {
                     isFirstLine = false;
                 } else {
                     List<String> row = new ArrayList<>();
+                    boolean hasData = false;
+                    
                     for (String value : values) {
-                        row.add(value.trim().replace("\"", ""));
+                        String cleaned = value.trim().replace("\"", "");
+                        row.add(cleaned);
+                        if (!cleaned.isEmpty()) {
+                            hasData = true;
+                        }
                     }
-                    rows.add(row);
+                    
+                    if (hasData) {
+                        rows.add(row);   // only add non-empty rows
+                    }
+                    
                 }
             }
 
@@ -80,8 +90,11 @@ public class FileHandler {
         List<String> columnData = new ArrayList<>();
         for (List<String> row : rows) {
             if (columnIndex < row.size()) {
-                columnData.add(row.get(columnIndex));
-            }
+                String value = row.get(columnIndex).trim();
+                if (!value.isEmpty()) {
+                    columnData.add(value);
+                }
+                            }
         }
         return columnData;
     }
