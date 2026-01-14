@@ -4,6 +4,9 @@ public class MergeSort implements SortingAlgorithm {
 
     @Override
     public void sort(int[] array) {
+        if (array == null || array.length <= 1) {
+            return;
+        }
         mergeSort(array, 0, array.length - 1);
     }
 

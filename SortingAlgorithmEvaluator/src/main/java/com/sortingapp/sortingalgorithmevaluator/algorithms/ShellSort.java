@@ -4,6 +4,10 @@ public class ShellSort implements SortingAlgorithm {
 
     @Override
     public void sort(int[] array) {
+    
+        if (array == null || array.length <= 1) {
+            return;
+        }
         int n = array.length;
 
         for (int gap = n/2; gap > 0; gap /= 2) {
