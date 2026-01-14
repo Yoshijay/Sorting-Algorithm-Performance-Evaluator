@@ -102,16 +102,28 @@ public class MainController {
         double[] data = csvData.getNumericColumn(columnIndex);
 
         Map<String, Long> results = SortingAlgorithm.compareAllAlgorithms(data);
-        List<SortingResult> sortingResults = SortingResult.fromResultMap(results);
+        String bestAlgorithm = SortingAlgorithm.getBestAlgorithm(results);
+
+        List<SortingResult> sortingResults = results.entrySet().stream()
+                .map(entry -> new SortingResult(
+                        entry.getKey(),
+                        entry.getValue(),
+                        entry.getKey().equals(bestAlgorithm) ? "FASTEST" : ""
+                ))
+                .toList();
 
         ObservableList<SortingResult> observableResults =
                 FXCollections.observableArrayList(sortingResults);
 
         resultsTable.setItems(observableResults);
 
-        bestAlgorithmLabel.setText(
-                "Best Algorithm: " + SortingAlgorithm.getBestAlgorithm(results)
+        String bestAlgorithm = SortingAlgorithm.getBestAlgorithm(results);
+
+        bestAlgorithmLabel.setText("Best Algorithm: " + bestAlgorithm);
+        bestAlgorithmLabel.setStyle(
+                "-fx-font-weight: bold; -fx-text-fill: green;"
         );
+
     }
 
     private void showError(String title, String message) {
