@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17"
+<VBox spacing="15" alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.sortingapp.sortingalgorithmevaluator.controllers.MainController"
-      spacing="10"
-      alignment="CENTER">
+      fx:controller="com.sortingapp.sortingalgorithmevaluator.controllers.MainController">
 
     <Label text="Sorting Algorithm Performance Evaluator"
-           style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+           style="-fx-font-size: 24; -fx-font-weight: bold;" />
 
-    <Label text="JavaFX project initialized successfully."/>
+    <Button text="Upload CSV File" onAction="#handleUpload" />
+
+    <ComboBox fx:id="columnComboBox"
+              promptText="Select Numeric Column"
+              style="-fx-pref-width: 250;" />
+
+    <Button text="Sort & Compare"
+            onAction="#handleSort" />
+
+    <TableView fx:id="resultsTable" style="-fx-pref-height: 200;">
+        <columns>
+            <TableColumn text="Algorithm" prefWidth="200" />
+            <TableColumn text="Execution Time (ms)" prefWidth="200" />
+        </columns>
+    </TableView>
+
+    <Label fx:id="bestAlgorithmLabel"
+           text="Best Algorithm:"
+           style="-fx-font-size: 14; -fx-font-weight: bold;" />
+
+    <TableView fx:id="dataPreviewTable"
+               style="-fx-pref-height: 150;" />
+
 </VBox>
